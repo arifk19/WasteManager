@@ -7,21 +7,31 @@ public class AuthToken {
 	private String token;
 	private Date tokenExpiryDate;
 
-	public Date getTokenExpiryDate() {
-		return tokenExpiryDate;
-	}
-
-	public void setTokenExpiryDate(Date tokenExpiryDate) {
-		this.tokenExpiryDate = tokenExpiryDate;
-	}
+	private String userRole;
 
 	public AuthToken() {
 
 	}
 
-	
-	public AuthToken(String token, Date tokenExpiryDate) {
+	public AuthToken(String token, Date tokenExpiryDate, String subject) {
 		this.token = token;
+		this.tokenExpiryDate = tokenExpiryDate;
+		this.userRole = subject;
+	}
+
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+
+	public Date getTokenExpiryDate() {
+		return tokenExpiryDate;
+	}
+
+	public void setTokenExpiryDate(Date tokenExpiryDate) {
 		this.tokenExpiryDate = tokenExpiryDate;
 	}
 
@@ -32,5 +42,4 @@ public class AuthToken {
 	public void setToken(String token) {
 		this.token = token;
 	}
-
 }

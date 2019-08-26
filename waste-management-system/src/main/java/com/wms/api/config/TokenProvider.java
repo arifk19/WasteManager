@@ -39,7 +39,7 @@ public class TokenProvider implements Serializable {
 		return claimsResolver.apply(claims);
 	}
 
-	private Claims getAllClaimsFromToken(String token) {
+	public Claims getAllClaimsFromToken(String token) {
 		return Jwts.parser().setSigningKey(SecurityError.SIGNING_KEY.getValue()).parseClaimsJws(token).getBody();
 	}
 
