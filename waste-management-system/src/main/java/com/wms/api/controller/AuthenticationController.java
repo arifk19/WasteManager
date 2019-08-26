@@ -1,4 +1,6 @@
 package com.wms.api.controller;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -39,7 +41,8 @@ public class AuthenticationController {
         );
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final String token = jwtTokenUtil.generateToken(authentication);
-        return ResponseEntity.ok(new AuthToken(token));
+        final Date tokenEpiry = jwtTokenUtil.getExpirationDateFromToken(token);
+        return ResponseEntity.ok(new AuthToken(token, tokenEpiry));
     }
 
 }
