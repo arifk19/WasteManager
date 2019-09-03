@@ -6,6 +6,7 @@ public class AuthToken {
 
 	private String token;
 	private Date tokenExpiryDate;
+
 	private String userRole;
 
 	public AuthToken() {

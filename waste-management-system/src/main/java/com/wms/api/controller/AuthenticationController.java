@@ -41,8 +41,8 @@ public class AuthenticationController {
 		final String token = jwtTokenUtil.generateToken(authentication);
 		final Date expiryDate = jwtTokenUtil.getExpirationDateFromToken(token);
 		final Claims claims = jwtTokenUtil.getAllClaimsFromToken(token);
-		final String userRole= (String) claims.get("scopes");
-		
+		final String userRole = (String) claims.get("scopes");
+
 		return ResponseEntity.ok(new AuthToken(token, expiryDate, userRole));
 	}
 }
