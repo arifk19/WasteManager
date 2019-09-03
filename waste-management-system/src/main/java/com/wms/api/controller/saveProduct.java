@@ -5,6 +5,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +26,7 @@ import com.wms.api.service.ProductService;
  */
 @RestController
 @RequestMapping("/product")
-public class ProductController {
+public class saveProduct {
 
 	@Autowired
 	private ProductService productService;
@@ -41,8 +42,9 @@ public class ProductController {
 	 * @throws NoSuchMessageException
 	 * @throws ApplicationCustomException
 	 */
+	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ResponseEntity<?> getbalanceResponse(@RequestBody ProductCategoryDTO productCategoryDTO)
+	public ResponseEntity<?> saveProducts(@RequestBody ProductCategoryDTO productCategoryDTO)
 			throws NoSuchMessageException, ApplicationCustomException {
 		final ProductCategoryDTO productCategoryResponseDTO = productService
 				.saveProductWithCategory(productCategoryDTO);

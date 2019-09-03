@@ -35,7 +35,6 @@ public class TokenProvider implements Serializable {
 
 	public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
 		final Claims claims = getAllClaimsFromToken(token);
-		claims.setExpiration(getExpirationDateFromToken(token));
 		return claimsResolver.apply(claims);
 	}
 
