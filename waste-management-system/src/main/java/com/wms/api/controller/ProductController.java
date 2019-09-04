@@ -26,7 +26,7 @@ import com.wms.api.service.ProductService;
  */
 @RestController
 @RequestMapping("/product")
-public class saveProduct {
+public class ProductController {
 
 	@Autowired
 	private ProductService productService;

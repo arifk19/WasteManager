@@ -27,10 +27,9 @@ public class ProductServiceImpl implements ProductService {
 
 			ProductCategory productCategory = new ProductCategory();
 			Set<Product> products = new HashSet<Product>();
-			Product product = new Product();
-
 			if (productCategoryDTO.getProducts().size() != 0) {
 				for (ProductDTO productDTO : productCategoryDTO.getProducts()) {
+					Product product = new Product();
 					product.setProductName(productDTO.getProductName());
 					product.setProductDescription(productDTO.getProductDescription());
 					product.setProductPrice(productDTO.getProductPrice());
@@ -41,8 +40,8 @@ public class ProductServiceImpl implements ProductService {
 			productCategory.setProductCategoryDescription(productCategoryDTO.getProductCategoryDescription());
 			productCategory.setProducts(products);
 
-			Long producId = productDAO.save(productCategory);
-			if (producId != null) {
+			Long productId = productDAO.save(productCategory);
+			if (productId != null) {
 				return productCategoryDTO;
 			}
 		}
