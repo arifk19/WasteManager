@@ -1,5 +1,7 @@
 package com.wms.api.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.NoSuchMessageException;
@@ -15,7 +17,7 @@ import com.wms.api.dto.ProductCategoryDTO;
 import com.wms.api.enums.SecurityError;
 import com.wms.api.exception.ApplicationCustomException;
 import com.wms.api.response.BaseResponse;
-import com.wms.api.service.ProductService;
+import com.wms.api.service.ProductCategoryService;
 
 /**
  * This is the controller class with have all the functionality of the product
@@ -25,11 +27,11 @@ import com.wms.api.service.ProductService;
  *
  */
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/product-category")
 public class ProductController {
 
 	@Autowired
-	private ProductService productService;
+	private ProductCategoryService productService;
 
 	@Autowired
 	private MessageSource messageSource;
@@ -44,13 +46,52 @@ public class ProductController {
 	 */
 	@PreAuthorize("hasRole('ADMIN')")
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ResponseEntity<?> saveProducts(@RequestBody ProductCategoryDTO productCategoryDTO)
+	public ResponseEntity<?> saveProductCategory(@RequestBody ProductCategoryDTO productCategoryDTO)
 			throws NoSuchMessageException, ApplicationCustomException {
-		final ProductCategoryDTO productCategoryResponseDTO = productService
-				.saveProductWithCategory(productCategoryDTO);
+		final ProductCategoryDTO productCategoryResponseDTO = productService.saveProductCategory(productCategoryDTO);
 		if (productCategoryResponseDTO != null) {
 			return new ResponseEntity<Object>(new BaseResponse(HttpStatus.OK.value(),
 					messageSource.getMessage("product.save.with.category", null, null), productCategoryResponseDTO),
+					HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Object>(new BaseResponse(HttpStatus.BAD_REQUEST.value(),
+					SecurityError.OPERATION_FAILED.getDescription(), null), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	/**
+	 * This api is created to get the product category information
+	 * 
+	 * @param productCategoryDTO
+	 * @return
+	 * @throws NoSuchMessageException
+	 * @throws ApplicationCustomException
+	 */
+	@PreAuthorize("hasRole('ADMIN')")
+	@RequestMapping(value = "/get-product-category-info", method = RequestMethod.POST)
+	public ResponseEntity<?> getProductCategory(@RequestBody ProductCategoryDTO productCategoryDTO)
+			throws NoSuchMessageException, ApplicationCustomException {
+		final ProductCategoryDTO productCategoryResponseDTO = productService.getProductCategory(productCategoryDTO);
+		if (productCategoryResponseDTO != null) {
+			return new ResponseEntity<Object>(new BaseResponse(HttpStatus.OK.value(),
+					messageSource.getMessage("product.category.information", null, null), productCategoryResponseDTO),
+					HttpStatus.OK);
+		} else {
+			return new ResponseEntity<Object>(new BaseResponse(HttpStatus.BAD_REQUEST.value(),
+					SecurityError.OPERATION_FAILED.getDescription(), null), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "/get", method = RequestMethod.GET)
+	public ResponseEntity<?> getProductCategories() {
+		final List<ProductCategoryDTO> productCategoryResponseDTO = productService.getProductCategory();
+		if (productCategoryResponseDTO != null) {
+			return new ResponseEntity<Object>(new BaseResponse(HttpStatus.OK.value(),
+					messageSource.getMessage("product.category.list", null, null), productCategoryResponseDTO),
 					HttpStatus.OK);
 		} else {
 			return new ResponseEntity<Object>(new BaseResponse(HttpStatus.BAD_REQUEST.value(),

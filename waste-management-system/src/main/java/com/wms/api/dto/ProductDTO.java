@@ -12,6 +12,15 @@ public class ProductDTO {
 	private String productDescription;
 	private float productPrice;
 	private String imagePath;
+	private long productCategoryId;
+
+	public long getProductCategoryId() {
+		return productCategoryId;
+	}
+
+	public void setProductCategoryId(long productCategoryId) {
+		this.productCategoryId = productCategoryId;
+	}
 
 	public String getProductName() {
 		return productName;

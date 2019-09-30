@@ -1,7 +1,5 @@
 package com.wms.api.dto;
 
-import java.util.Set;
-
 /**
  * This is a ProductCategoryDTO class which holds the information of the product
  * category
@@ -10,10 +8,18 @@ import java.util.Set;
  *
  */
 public class ProductCategoryDTO {
+	private long productCategoryId;
 	private String productCategoryName;
 	private String productCategoryDescription;
 	private String imagePath;
-	private Set<ProductDTO> products;
+
+	public long getProductCategoryId() {
+		return productCategoryId;
+	}
+
+	public void setProductCategoryId(long productCategoryId) {
+		this.productCategoryId = productCategoryId;
+	}
 
 	public String getProductCategoryName() {
 		return productCategoryName;
@@ -39,11 +45,4 @@ public class ProductCategoryDTO {
 		this.imagePath = imagePath;
 	}
 
-	public Set<ProductDTO> getProducts() {
-		return products;
-	}
-
-	public void setProducts(Set<ProductDTO> products) {
-		this.products = products;
-	}
 }

@@ -3,6 +3,7 @@ package com.wms.api.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -13,7 +14,7 @@ import javax.persistence.Table;
 public class Product {
 	@Id
 	@Column(name = "product_id")
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long productId;
 
 	@Column(name = "product_name")
@@ -29,7 +30,7 @@ public class Product {
 	private String imagePath;
 
 	@ManyToOne
-	@JoinColumn(name = "product_category_id")
+	@JoinColumn(name = "product_category_id", nullable = false)
 	private ProductCategory productCategory;
 
 	public Product() {
@@ -77,20 +78,20 @@ public class Product {
 		this.productPrice = productPrice;
 	}
 
-	public ProductCategory getProductCategory() {
-		return productCategory;
-	}
-
-	public void setProductCategory(ProductCategory productCategory) {
-		this.productCategory = productCategory;
-	}
-
 	public String getImagePath() {
 		return imagePath;
 	}
 
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+
+	public ProductCategory getProductCategory() {
+		return productCategory;
+	}
+
+	public void setProductCategory(ProductCategory productCategory) {
+		this.productCategory = productCategory;
 	}
 
 }
