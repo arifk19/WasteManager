@@ -1,5 +1,6 @@
 package com.wms.api.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -23,7 +24,7 @@ public interface ProductCategoryDAO {
 	 * @throws HibernateException
 	 * @throws ApplicationCustomException
 	 */
-	public boolean saveProductCategroy(ProductCategoryDTO productCategoryDTO)
+	public Serializable saveProductCategroy(ProductCategoryDTO productCategoryDTO)
 			throws HibernateException, ApplicationCustomException;
 
 	/**

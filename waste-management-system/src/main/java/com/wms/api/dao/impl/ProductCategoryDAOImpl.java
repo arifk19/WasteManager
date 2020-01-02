@@ -28,7 +28,7 @@ public class ProductCategoryDAOImpl implements ProductCategoryDAO {
 	private MessageSource messageSource;
 
 	@Override
-	public boolean saveProductCategroy(ProductCategoryDTO productCategoryDTO)
+	public Serializable saveProductCategroy(ProductCategoryDTO productCategoryDTO)
 			throws HibernateException, ApplicationCustomException {
 
 		final ProductCategory productCategoryExist = (ProductCategory) productCategoryDAO.getCurrentSession()
@@ -50,10 +50,10 @@ public class ProductCategoryDAOImpl implements ProductCategoryDAO {
 			}
 			Serializable productCategorySave = productCategoryDAO.save(productCategory);
 			if (productCategorySave != null) {
-				return true;
+				return productCategorySave;
 			}
 		}
-		return false;
+		return null;
 	}
 
 	@Override

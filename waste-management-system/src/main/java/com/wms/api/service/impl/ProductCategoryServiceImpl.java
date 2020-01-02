@@ -1,5 +1,6 @@
 package com.wms.api.service.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -35,8 +36,9 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 	public ProductCategoryDTO saveProductCategory(ProductCategoryDTO productCategoryDTO)
 			throws HibernateException, ApplicationCustomException {
 		if (productCategoryDTO != null) {
-			boolean saveStatus = productCategoryDAO.saveProductCategroy(productCategoryDTO);
-			if (saveStatus) {
+			Serializable saveStatus = productCategoryDAO.saveProductCategroy(productCategoryDTO);
+			if (saveStatus != null) {
+				productCategoryDTO.setProductCategoryId(Long.parseLong(saveStatus.toString()));
 				return productCategoryDTO;
 			}
 		}
