@@ -86,6 +86,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 		newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
 		newUser.setAge(user.getAge());
 		newUser.setSalary(user.getSalary());
+		newUser.setEmailAddress(user.getEmailAddress());
 		Role userRoleIs = roleDao.findById(user.getRole());
 		if (userRoleIs != null) {
 			Set<Role> role = new HashSet<>();

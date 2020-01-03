@@ -7,6 +7,7 @@ public class UserDto {
 	private int age;
 	private int salary;
 	private Long role;
+	private String emailAddress;
 
 	public Long getRole() {
 		return role;
@@ -47,4 +48,13 @@ public class UserDto {
 	public void setSalary(int salary) {
 		this.salary = salary;
 	}
+
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
 }
